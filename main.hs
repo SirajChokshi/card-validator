@@ -4,11 +4,14 @@ import Data.Ix
 main :: IO ()
 main = do
     args <- getArgs
-    if length args == 1
+    if isValidString args
     then do
         let numString = head args
         putStrLn $ show (getIssuer numString)
-    else putStrLn "Error: Invalid amount of arguments.\n$ validate-card <filepath>"
+    else putStrLn "Error: Invalid amount of arguments.\n$ validate-card <card number>"
+
+isValidString :: [String] -> Bool
+isValidString args = length args == 1 && length (head args) >= 13
 
 getIssuer :: String -> String
 getIssuer numString
